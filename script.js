@@ -43,7 +43,6 @@ function openPage(type) {
     html = `
       <h2>CONTACT</h2>
       <div class="contact-grid">
-        <a href="tel:${data.contact.phone}" class="contact-card">📞 ${data.contact.phone}</a>
         <a href="mailto:${data.contact.email}" class="contact-card">✉️ ${data.contact.email}</a>
         <a href="https://${data.contact.linkedin}" target="_blank" class="contact-card">🔗 LinkedIn</a>
         <a href="https://${data.contact.github}" target="_blank" class="contact-card">💻 GitHub</a>
@@ -139,3 +138,41 @@ cards.forEach(card => {
   });
 
 });
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+  body {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .menu div {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-card {
+    width: 100%;
+    text-align: center;
+  }
+}
