@@ -6,15 +6,13 @@ fetch('./profile.json')
   .then(json => {
     data = json;
 
-    document.getElementById("name").innerText = data.name;
-    document.getElementById("title").innerText = data.title;
-
-    // prevent UI before data loads
-    document.body.classList.add("ready");
+    document.getElementById("name").innerText = data.name || "";
+    document.getElementById("title").innerText = data.title || "";
   })
   .catch(err => {
     console.error("JSON Load Error:", err);
   });
+
 
 // ================= PAGE OPEN =================
 function openPage(type) {
@@ -22,30 +20,30 @@ function openPage(type) {
   let html = "";
 
   if (type === "about") {
-    html = `<h2>ABOUT</h2><p>${data.about}</p>`;
+    html = `<h2>ABOUT</h2><p>${data.about || ""}</p>`;
   }
 
   if (type === "skills") {
     html = `<h2>SKILLS</h2>
-      ${data.skills.map(s => `<p>${s}</p>`).join('')}`;
+      ${(data.skills || []).map(s => `<p>${s}</p>`).join('')}`;
   }
 
   if (type === "projects") {
     html = `<h2>PROJECTS</h2>
-      ${data.projects.map(p => `<p>${p.name} - ${p.desc}</p>`).join('')}`;
+      ${(data.projects || []).map(p => `<p>${p.name} - ${p.desc}</p>`).join('')}`;
   }
 
   if (type === "experience") {
-    html = `<h2>EXPERIENCE</h2><p>${data.experience}</p>`;
+    html = `<h2>EXPERIENCE</h2><p>${data.experience || ""}</p>`;
   }
 
   if (type === "contact") {
     html = `
       <h2>CONTACT</h2>
       <div class="contact-grid">
-        <a href="mailto:${data.contact.email}" class="contact-card">✉️ ${data.contact.email}</a>
-        <a href="https://${data.contact.linkedin}" target="_blank" class="contact-card">🔗 LinkedIn</a>
-        <a href="https://${data.contact.github}" target="_blank" class="contact-card">💻 GitHub</a>
+        <a href="mailto:${data.contact?.email || ""}" class="contact-card">✉️ ${data.contact?.email || ""}</a>
+        <a href="https://${data.contact?.linkedin || ""}" target="_blank" class="contact-card">🔗 LinkedIn</a>
+        <a href="https://${data.contact?.github || ""}" target="_blank" class="contact-card">💻 GitHub</a>
       </div>
     `;
   }
@@ -78,15 +76,6 @@ document.addEventListener("mousemove", e => {
 });
 
 
-// ================= LOADER =================
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    const loader = document.getElementById("loader");
-    if (loader) loader.classList.add("hide");
-  }, 800);
-});
-
-
 // ================= MOBILE SWIPE BACK =================
 let startX = 0;
 
@@ -103,7 +92,7 @@ document.addEventListener("touchend", e => {
 });
 
 
-// ================= 🧲 MAGNETIC EFFECT =================
+// ================= MAGNETIC EFFECT =================
 const cards = document.querySelectorAll(".menu div");
 
 cards.forEach(card => {
@@ -120,7 +109,6 @@ cards.forEach(card => {
     const moveX = (x - centerX) * 0.25;
     const moveY = (y - centerY) * 0.25;
 
-    // 🔥 movement + 3D tilt
     card.style.transform = `
       translate(${moveX}px, ${moveY}px)
       rotateX(${-(y - centerY) / 10}deg)
@@ -128,7 +116,6 @@ cards.forEach(card => {
       scale(1.03)
     `;
 
-    // ✨ glow follows cursor
     card.style.setProperty('--x', x + 'px');
     card.style.setProperty('--y', y + 'px');
   });
@@ -138,41 +125,3 @@ cards.forEach(card => {
   });
 
 });
-/* MOBILE FIX */
-@media (max-width: 768px) {
-
-  body {
-    padding: 16px;
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  .menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .menu div {
-    width: 100%;
-    padding: 16px;
-    font-size: 16px;
-  }
-
-  .contact-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .contact-card {
-    width: 100%;
-    text-align: center;
-  }
-}
