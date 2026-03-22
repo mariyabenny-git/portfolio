@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<div id="loader">
-<h1>Loading...</h1>
-</div>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <h1>Loading...</h1>
+</div>
+
+<!-- CURSOR -->
 <div class="cursor"></div>
 
 <!-- HOME -->
@@ -45,7 +49,7 @@
 
 <!-- PAGE -->
 <div id="page" class="screen">
-  <button onclick="goBack()">←</button>
+  <button id="backBtn" onclick="goBack()">← Back</button>
   <div id="content"></div>
 </div>
 
