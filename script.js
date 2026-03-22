@@ -125,3 +125,8 @@ cards.forEach(card => {
   });
 
 });
+// ================= SWIPE HINT AUTO HIDE =================
+setTimeout(() => {
+  const hint = document.getElementById("swipeHint");
+  if (hint) hint.style.display = "none";
+}, 3000);
