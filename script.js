@@ -1,15 +1,20 @@
 // ================= DATA LOAD =================
 let data = {};
 
-fetch('profile.json')
+fetch('./profile.json')
   .then(res => res.json())
   .then(json => {
     data = json;
 
     document.getElementById("name").innerText = data.name;
     document.getElementById("title").innerText = data.title;
-  });
 
+    // prevent UI before data loads
+    document.body.classList.add("ready");
+  })
+  .catch(err => {
+    console.error("JSON Load Error:", err);
+  });
 
 // ================= PAGE OPEN =================
 function openPage(type) {
