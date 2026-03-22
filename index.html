@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<div id="loader">
+<h1>Loading...</h1>
+</div>
+<meta charset="UTF-8">
+<title>Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="cursor"></div>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+
+  <div class="layout">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+      <h1 id="name"></h1>
+      <p class="subtitle" id="title"></p>
+
+      <div class="intro">
+        <p>Building modern, smooth and intelligent digital experiences.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+      <div class="menu">
+        <div onclick="openPage('about')">About</div>
+        <div onclick="openPage('skills')">Skills</div>
+        <div onclick="openPage('projects')">Projects</div>
+        <div onclick="openPage('experience')">Experience</div>
+        <div onclick="openPage('contact')">Contact</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PAGE -->
+<div id="page" class="screen">
+  <button onclick="goBack()">←</button>
+  <div id="content"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

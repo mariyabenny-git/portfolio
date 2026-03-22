@@ -1,0 +1,22 @@
+{
+  "name": "Alex",
+  "title": "B.E. Computer Science Student",
+
+  "about": "I build modern applications with clean UI and smooth user experiences.",
+  
+  "skills": ["Python", "JavaScript", "Web Development", "AI Basics"],
+
+  "projects": [
+    {"name": "Project Nova", "desc": "Productivity web app"},
+    {"name": "SpeakEasy", "desc": "Communication platform"}
+  ],
+
+  "experience": "Freelance Tutor for Mathematics and Science",
+
+  "contact": {
+    "phone": "+91 98765 43210",
+    "email": "alex@example.com",
+    "linkedin": "linkedin.com/in/alex",
+    "github": "github.com/alex"
+  }
+}
