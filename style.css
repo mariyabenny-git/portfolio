@@ -311,3 +311,15 @@ button:active {
 .menu div:hover::after {
   opacity: 1;
 }
+#backBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  z-index: 999;
+}
