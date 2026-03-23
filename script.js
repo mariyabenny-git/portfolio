@@ -93,7 +93,39 @@ document.addEventListener("touchend", e => {
 
 
 // ================= MAGNETIC EFFECT =================
+const isMobile = window.innerWidth <= 768;
+
 const cards = document.querySelectorAll(".menu div");
+
+if (!isMobile) {
+  cards.forEach(card => {
+
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const moveX = (x - centerX) * 0.25;
+      const moveY = (y - centerY) * 0.25;
+
+      card.style.transform = `
+        translate(${moveX}px, ${moveY}px)
+        rotateX(${-(y - centerY) / 10}deg)
+        rotateY(${(x - centerX) / 10}deg)
+        scale(1.03)
+      `;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "translate(0,0) scale(1)";
+    });
+
+  });
+}
 
 cards.forEach(card => {
 
