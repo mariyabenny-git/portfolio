@@ -226,7 +226,11 @@ body::after {
 #backBtn:active {
   transform: scale(0.9);
 }
-
+@media (hover: none) and (pointer: coarse) {
+  #backBtn {
+    display: none;
+  }
+}
 /* SWIPE HINT (FIXED POSITION) */
 #swipeHint {
   position: fixed;
