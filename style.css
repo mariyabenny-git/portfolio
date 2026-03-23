@@ -247,7 +247,11 @@ body::after {
 
   animation: fadeSlide 0.8s ease;
 }
-
+@media (min-width: 769px) {
+  #swipeHint {
+    display: none;
+  }
+}
 /* ANIMATION */
 @keyframes fadeSlide {
   from {
