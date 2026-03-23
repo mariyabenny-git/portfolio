@@ -90,7 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
       goBack();
     }
   });
-
+setTimeout(() => {
+  const hint = document.getElementById("swipeHint");
+  if (hint) hint.style.display = "none";
+}, 3000);
   // ================= MAGNETIC EFFECT (DESKTOP ONLY) =================
   const isMobile = window.innerWidth <= 768;
   const cards = document.querySelectorAll(".menu div");
