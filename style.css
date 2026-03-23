@@ -14,6 +14,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* BODY */
@@ -21,7 +22,15 @@ body {
   font-family: 'Inter', sans-serif;
   background: #0a0a0d;
   color: var(--text);
-  overflow-x: hidden; /* FIXED */
+  overflow-x: hidden;
+
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ALLOW TEXT SELECT */
+p, h1, h2 {
+  user-select: text;
 }
 
 /* BACKGROUND */
@@ -50,7 +59,7 @@ body::after {
   z-index: -2;
 }
 
-/* CURSOR */
+/* CURSOR (DISABLE ON MOBILE) */
 .cursor {
   width: 14px;
   height: 14px;
@@ -60,6 +69,13 @@ body::after {
   pointer-events: none;
   transform: translate(-50%, -50%);
   opacity: 0.5;
+}
+
+/* HIDE CURSOR ON TOUCH DEVICES */
+@media (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
 }
 
 /* SCREEN */
@@ -118,12 +134,21 @@ body::after {
   border: 1px solid var(--border);
   background: var(--card);
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.25s ease;
+
+  touch-action: manipulation;
 }
 
+/* HOVER */
 .menu div:hover {
   transform: translateX(6px);
   border-color: var(--accent);
+}
+
+/* FIX TOUCH FEEDBACK */
+.menu div:active {
+  transform: scale(0.97);
+  background: rgba(255,255,255,0.08);
 }
 
 /* PAGE */
@@ -167,30 +192,79 @@ body::after {
   border: 1px solid var(--border);
   text-decoration: none;
   color: white;
+
+  touch-action: manipulation;
 }
 
 .contact-card:hover {
   background: var(--accent);
 }
 
-/* BACK BUTTON */
+/* FLOATING BACK BUTTON */
 #backBtn {
   position: fixed;
-  top: 20px;
+  bottom: 25px;
   right: 20px;
-  padding: 8px 14px;
-  border-radius: 20px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.05);
+
+  padding: 12px 16px;
+  border-radius: 50px;
+
   color: white;
+  font-size: 18px;
   cursor: pointer;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+#backBtn:active {
+  transform: scale(0.9);
+}
+
+/* SWIPE HINT (FIXED POSITION) */
+#swipeHint {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+
+  opacity: 0.85;
+  z-index: 999;
+
+  animation: fadeSlide 0.8s ease;
+}
+
+/* ANIMATION */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translate(-50%, 0);
+  }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
 
   .layout {
-    grid-template-columns: 1fr; /* FIXED */
+    grid-template-columns: 1fr;
   }
 
   .left, .right {
@@ -200,58 +274,13 @@ body::after {
   .menu div {
     width: 100%;
   }
-}
-/* REMOVE TAP HIGHLIGHT */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
 
-/* PREVENT WEIRD TEXT SELECT */
-body {
-  user-select: none;
-  -webkit-user-select: none;
-}
+  #swipeHint {
+    bottom: 100px;
+  }
 
-/* ALLOW TEXT SELECT */
-p, h1, h2 {
-  user-select: text;
-}
-
-/* BACK BUTTON (MINIMAL) */
-#backBtn {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 20px;
-
-  opacity: 0.7;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-#backBtn:hover {
-  opacity: 1;
-}
-
-/* SWIPE HINT */
-#swipeHint {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-
-  padding: 8px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  color: white;
-
-  opacity: 0.8;
-  z-index: 999;
+  #backBtn {
+    bottom: 20px;
+    right: 15px;
+  }
 }
