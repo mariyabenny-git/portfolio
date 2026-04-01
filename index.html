@@ -1,36 +1,484 @@
-{
-  "name": "Alex",
-  "title": "B.E. Computer Science Student",
-  "about": "I build modern applications with clean UI and smooth user experiences. Passionate about bridging the gap between design and scalable code.",
-  
-  "skills": [
-    {"name": "Python", "category": "Language"},
-    {"name": "JavaScript", "category": "Language"},
-    {"name": "Web Dev", "category": "Frontend"},
-    {"name": "AI Basics", "category": "Other"}
-  ],
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex | Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap">
 
+<style>
+/* ================= CSS VARIABLES & RESET ================= */
+:root {
+  --bg: #0b0b0f;
+  --card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --sub: #9aa0a6;
+  --accent: #8b5cf6;
+  --accent-glow: rgba(139, 92, 246, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0d;
+  color: var(--text);
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+p, h1, h2, h3 {
+  user-select: text;
+}
+
+/* ================= BACKGROUNDS ================= */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px, 40px 40px;
+  z-index: -3;
+  opacity: 0.4;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(139,92,246,0.12), transparent 70%);
+  top: 30%;
+  left: 60%;
+  filter: blur(120px);
+  z-index: -2;
+}
+
+/* ================= CUSTOM CURSOR ================= */
+.cursor {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+  transition: transform 0.1s ease;
+  z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  .cursor { display: none; }
+}
+
+/* ================= SCREENS & LAYOUT ================= */
+.screen {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh; /* Fixed cut-off issues */
+  padding: 40px;
+  opacity: 0;
+  transform: translateX(40px);
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 80px);
+  align-items: center;
+  gap: 40px;
+}
+
+.left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.intro {
+  margin-top: 20px;
+  max-width: 450px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+/* ================= MENU & INTERACTIVES ================= */
+.menu {
+  display: grid;
+  gap: 15px;
+}
+
+.menu div {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+}
+
+.menu div:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ================= POPUP PAGE CONTENT ================= */
+#page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+
+#content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Dynamic Grid Elements */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+}
+
+.project-card h3 { margin-bottom: 8px; font-size: 1.2rem; }
+.project-card p { color: var(--sub); font-size: 0.9rem; line-height: 1.5; }
+
+.tech-stack {
+  display: flex;
+  gap: 6px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.tech-chip {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-tag {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.skill-tag:hover {
+  border-color: var(--accent);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.contact-card {
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  transition: 0.3s;
+  background: var(--card);
+}
+
+.contact-card:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* ================= BUTTONS & HINTS ================= */
+#backBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 50px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+#backBtn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+#swipeHint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: white;
+  z-index: 999;
+  animation: fadeSlide 0.8s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (min-width: 769px) { #swipeHint { display: none; } }
+
+/* ================= MOBILE RESPONSIVENESS ================= */
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; text-align: center; }
+  .left h1 { font-size: 2.5rem; }
+  .intro { margin: 20px auto 0 auto; }
+  .screen { padding: 20px; }
+  #content { padding: 25px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+
+<div id="home" class="screen active">
+  <div class="layout">
+    <div class="left">
+      <h1 id="name">Alex</h1>
+      <p class="subtitle" id="title">B.E. Computer Science Student</p>
+      <div class="intro">
+        <p>Building modern, smooth and intelligent digital experiences. Passionate about bridging design with scalable, interactive code.</p>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="menu">
+        <div onclick="openPage('about')">About Me</div>
+        <div onclick="openPage('skills')">My Tech Stack</div>
+        <div onclick="openPage('projects')">Featured Projects</div>
+        <div onclick="openPage('experience')">Experience</div>
+        <div onclick="openPage('contact')">Let's Connect</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page" class="screen">
+  <button id="backBtn" onclick="goBack()">← Back</button>
+  <div id="content"></div>
+</div>
+
+<div id="swipeHint">Swipe → to go back</div>
+
+<script>
+// ================= DATA =================
+const data = {
+  "about": "I build modern applications with clean UI and smooth user experiences. Currently focusing on developing polished, high-performance web applications.",
+  "skills": ["Python", "JavaScript", "Web Development", "UI/UX Basics", "React", "Node.js"],
   "projects": [
-    {
-      "name": "Project Nova", 
-      "desc": "A high-performance productivity web application featuring real-time data syncing and modular widgets.",
-      "tech": ["HTML", "CSS", "JS"],
-      "link": "https://github.com"
-    },
-    {
-      "name": "SpeakEasy", 
-      "desc": "A secure communication platform utilizing end-to-end encryption for voice and text chat.",
-      "tech": ["Python", "Socket.io"],
-      "link": "https://github.com"
-    }
+    {"name": "Project Nova", "desc": "A slick productivity web app featuring live drag-and-drop widgets.", "tech": ["HTML", "CSS", "JS"]},
+    {"name": "SpeakEasy", "desc": "An encrypted communication platform built for secure local networks.", "tech": ["Python", "WebSockets"]}
   ],
-
-  "experience": "Freelance Tutor for Mathematics and Science",
-
+  "experience": "Freelance Tutor for Mathematics and Science. Helping students break down complex logic into understandable bits.",
   "contact": {
-    "phone": "+91 98765 43210",
     "email": "alex@example.com",
     "linkedin": "linkedin.com/in/alex",
     "github": "github.com/alex"
   }
+};
+
+// ================= PAGE NAVIGATION =================
+window.openPage = function(type) {
+  let html = "";
+
+  if (type === "about") {
+    html = `<h2>About Me</h2><p style="line-height:1.7; color:#d1d5db;">${data.about}</p>`;
+  }
+
+  if (type === "skills") {
+    html = `
+      <h2>Tech Stack</h2>
+      <div class="skills-grid">
+        ${data.skills.map(s => `<div class="skill-tag">${s}</div>`).join('')}
+      </div>
+    `;
+  }
+
+  if (type === "projects") {
+    html = `
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        ${data.projects.map(p => `
+          <div class="project-card">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="tech-stack">
+              ${p.tech.map(t => `<span class="tech-chip">${t}</span>`).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  if (type === "experience") {
+    html = `
+      <h2>Experience</h2>
+      <div class="project-card">
+        <h3>Freelance Educator</h3>
+        <p style="color:var(--accent); margin-bottom:10px;">STEM Focus</p>
+        <p>${data.experience}</p>
+      </div>
+    `;
+  }
+
+  if (type === "contact") {
+    html = `
+      <h2>Let's Connect</h2>
+      <div class="contact-grid">
+        <a href="mailto:${data.contact.email}" class="contact-card">✉️ Email Me</a>
+        <a href="https://${data.contact.linkedin}" target="_blank" class="contact-card">🔗 LinkedIn</a>
+        <a href="https://${data.contact.github}" target="_blank" class="contact-card">💻 GitHub</a>
+      </div>
+    `;
+  }
+
+  document.getElementById("content").innerHTML = html;
+  toggleScreen(false);
+};
+
+window.goBack = function() {
+  toggleScreen(true);
+};
+
+function toggleScreen(showHome) {
+  document.getElementById("home").classList.toggle("active", showHome);
+  document.getElementById("page").classList.toggle("active", !showHome);
 }
+
+// ================= CUSTOM CURSOR =================
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e => {
+  if (!cursor) return;
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
+// ================= SWIPE TO GO BACK (MOBILE) =================
+let startX = 0;
+document.addEventListener("touchstart", e => { startX = e.touches[0].clientX; });
+document.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  if (endX - startX > 100) { goBack(); }
+});
+
+// Auto hide swipe hint
+setTimeout(() => {
+  const hint = document.getElementById("swipeHint");
+  if (hint) hint.style.display = "none";
+}, 3500);
+
+// ================= MAGNETIC MENU EFFECT =================
+const isMobile = window.innerWidth <= 768;
+const menuCards = document.querySelectorAll(".menu div");
+
+if (!isMobile) {
+  menuCards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const moveX = (x - centerX) * 0.25;
+      const moveY = (y - centerY) * 0.25;
+
+      card.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "translate(0,0) scale(1)";
+    });
+  });
+}
+</script>
+
+</body>
+</html>
