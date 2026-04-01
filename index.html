@@ -1,54 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
-<link rel="stylesheet" href="style.css">
-</head>
+{
+  "name": "Alex",
+  "title": "B.E. Computer Science Student",
+  "about": "I build modern applications with clean UI and smooth user experiences. Passionate about bridging the gap between design and scalable code.",
+  
+  "skills": [
+    {"name": "Python", "category": "Language"},
+    {"name": "JavaScript", "category": "Language"},
+    {"name": "Web Dev", "category": "Frontend"},
+    {"name": "AI Basics", "category": "Other"}
+  ],
 
-<body>
+  "projects": [
+    {
+      "name": "Project Nova", 
+      "desc": "A high-performance productivity web application featuring real-time data syncing and modular widgets.",
+      "tech": ["HTML", "CSS", "JS"],
+      "link": "https://github.com"
+    },
+    {
+      "name": "SpeakEasy", 
+      "desc": "A secure communication platform utilizing end-to-end encryption for voice and text chat.",
+      "tech": ["Python", "Socket.io"],
+      "link": "https://github.com"
+    }
+  ],
 
-<!-- CURSOR -->
-<div class="cursor"></div>
+  "experience": "Freelance Tutor for Mathematics and Science",
 
-<!-- HOME -->
-<div id="home" class="screen active">
-
-  <div class="layout">
-
-    <div class="left">
-      <h1 id="name"></h1>
-      <p class="subtitle" id="title"></p>
-
-      <div class="intro">
-        <p>Building modern, smooth and intelligent digital experiences.</p>
-      </div>
-    </div>
-
-    <div class="right">
-      <div class="menu">
-        <div onclick="openPage('about')">About</div>
-        <div onclick="openPage('skills')">Skills</div>
-        <div onclick="openPage('projects')">Projects</div>
-        <div onclick="openPage('experience')">Experience</div>
-        <div onclick="openPage('contact')">Contact</div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- PAGE -->
-<div id="page" class="screen">
-  <button id="backBtn" onclick="goBack()">←</button>
-  <div id="content"></div>
-</div>
-
-<!-- SWIPE HINT -->
-<div id="swipeHint">Swipe → to go back</div>
-
-<script src="script.js"></script>
-</body>
-</html>
+  "contact": {
+    "phone": "+91 98765 43210",
+    "email": "alex@example.com",
+    "linkedin": "linkedin.com/in/alex",
+    "github": "github.com/alex"
+  }
+}
