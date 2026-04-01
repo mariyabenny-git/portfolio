@@ -1,294 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap');
-
 :root {
-  --bg: #0b0b0f;
-  --card: rgba(255,255,255,0.05);
-  --border: rgba(255,255,255,0.08);
-  --text: #ffffff;
-  --sub: #9aa0a6;
-  --accent: #8b5cf6;
+  --bg: #030305;
+  --card: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f3f4f6;
+  --sub: #9ca3af;
+  --accent: #a78bfa;
+  --accent-glow: rgba(167, 139, 250, 0.3);
 }
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* BODY */
-body {
-  font-family: 'Inter', sans-serif;
-  background: #0a0a0d;
-  color: var(--text);
-  overflow-x: hidden;
-
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* ALLOW TEXT SELECT */
-p, h1, h2 {
-  user-select: text;
-}
-
-/* BACKGROUND */
+/* Background grid refinement */
 body::before {
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image:
-    radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 20px 20px, 40px 40px, 40px 40px;
-  z-index: -3;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(139,92,246,0.12), transparent 70%);
-  top: 30%;
-  left: 60%;
-  filter: blur(120px);
-  z-index: -2;
-}
-
-/* CURSOR (DISABLE ON MOBILE) */
-.cursor {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  opacity: 0.5;
-}
-
-/* HIDE CURSOR ON TOUCH DEVICES */
-@media (max-width: 768px) {
-  .cursor {
-    display: none;
-  }
-}
-
-/* SCREEN */
-.screen {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  padding: 40px;
-  opacity: 0;
-  transform: translateX(60px);
-  pointer-events: none;
-  transition: 0.4s ease;
-}
-
-.screen.active {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: all;
-}
-
-/* LAYOUT */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 100%;
-  align-items: center;
-  gap: 40px;
-}
-
-/* LEFT */
-.left h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-}
-
-.subtitle {
-  margin-top: 10px;
-  color: var(--sub);
-}
-
-.intro {
-  margin-top: 20px;
-  max-width: 400px;
-  color: var(--sub);
-}
-
-/* MENU */
-.menu {
-  display: grid;
-  gap: 15px;
-}
-
-.menu div {
-  padding: 16px;
-  border-radius: 12px;
+/* Glassmorphism Cards */
+.menu div, .project-card, .contact-card {
+  background: var(--card);
   border: 1px solid var(--border);
-  background: var(--card);
-  cursor: pointer;
-  transition: 0.25s ease;
-
-  touch-action: manipulation;
-}
-
-/* HOVER */
-.menu div:hover {
-  transform: translateX(6px);
-  border-color: var(--accent);
-}
-
-/* FIX TOUCH FEEDBACK */
-.menu div:active {
-  transform: scale(0.97);
-  background: rgba(255,255,255,0.08);
-}
-
-/* PAGE */
-#page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* CONTENT */
-#content {
-  width: 100%;
-  max-width: 800px;
-  background: var(--card);
-  padding: 30px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  padding: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TEXT */
-#content h2 {
-  margin-bottom: 15px;
+.menu div:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-4px);
+}
+
+/* PROJECTS GRID */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.project-card h3 {
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.project-card p {
+  font-size: 0.9rem;
   color: var(--sub);
 }
 
-#content p {
-  margin-bottom: 10px;
-  color: #d1d5db;
+.tech-stack {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
 }
 
-/* CONTACT */
-.contact-grid {
-  display: grid;
-  gap: 10px;
-}
-
-.contact-card {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: white;
-
-  touch-action: manipulation;
-}
-
-.contact-card:hover {
-  background: var(--accent);
-}
-
-/* FLOATING BACK BUTTON */
-#backBtn {
-  position: fixed;
-  bottom: 100px;
-  right: 20px;
-
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-
-  padding: 12px 16px;
-  border-radius: 50px;
-
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-
-  z-index: 1000;
-  transition: 0.3s;
-}
-
-#backBtn:active {
-  transform: scale(0.9);
-}
-@media (hover: none) and (pointer: coarse) {
-  #backBtn {
-    display: none;
-  }
-}
-/* SWIPE HINT (FIXED POSITION) */
-#swipeHint {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-
-  padding: 10px 16px;
+.tech-chip {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 13px;
-  color: white;
-
-  opacity: 0.85;
-  z-index: 999;
-
-  animation: fadeSlide 0.8s ease;
-}
-@media (min-width: 769px) {
-  #swipeHint {
-    display: none;
-  }
-}
-/* ANIMATION */
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 20px);
-  }
-  to {
-    opacity: 0.85;
-    transform: translate(-50%, 0);
-  }
+  font-size: 0.75rem;
+  color: var(--accent);
+  border: 1px solid rgba(167, 139, 250, 0.2);
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* SKILLS CHIPS */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
 
-  .layout {
-    grid-template-columns: 1fr;
-  }
+.skill-tag {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
 
-  .left, .right {
-    text-align: center;
-  }
-
-  .menu div {
-    width: 100%;
-  }
-
-  #swipeHint {
-    bottom: 100px;
-  }
-
-  #backBtn {
-    bottom: 20px;
-    right: 15px;
-  }
+.skill-tag:hover {
+  border-color: var(--accent);
+  background: rgba(167, 139, 250, 0.05);
 }
