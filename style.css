@@ -28,7 +28,6 @@ body {
     padding: 2rem;
 }
 
-/* Bento Grid Layout */
 .bento-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -50,7 +49,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* Specific Card Rules */
 .profile-card {
     grid-column: span 1;
     display: flex;
@@ -66,7 +64,6 @@ body {
     grid-column: span 3;
 }
 
-/* UI Elements */
 .avatar {
     width: 80px;
     height: 80px;
@@ -100,7 +97,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Dynamic Grids */
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
@@ -155,11 +151,10 @@ body {
     font-size: 0.75rem;
     background-color: var(--accent-dim);
     color: var(--accent);
-    padding: 0.25rem 0.6rem;
+    padding: 0.25rem 0.6`rem;
     border-radius: 4px;
 }
 
-/* Responsive Breakpoints */
 @media (max-width: 900px) {
     .bento-container {
         grid-template-columns: 1fr;
