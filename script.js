@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initPortfolio() {
     try {
+        // Enforcing relative directory mapping to resolve remote path errors
         const response = await fetch('./profile.json');
-        if (!response.ok) throw new Error('Failed to load profile mapping configuration.');
+        if (!response.ok) throw new Error(`HTTP target error. Status: ${response.status}`);
+        
         const data = await response.json();
 
         renderProfile(data);
