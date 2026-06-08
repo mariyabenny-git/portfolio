@@ -7,6 +7,7 @@
   "socials": {
     "github": "https://github.com",
     "linkedin": "https://linkedin.com",
+    "email": "mailto:your.email@example.com"
   },
   "skills": [
     "Python", "JavaScript (ES6+)", "React", "Node.js", 
