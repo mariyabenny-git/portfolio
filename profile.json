@@ -1,0 +1,35 @@
+{
+  "name": "Mariya Benny",
+  "title": "Full-Stack Developer & AI Enthusiast",
+  "bio": "Computer Science & Engineering student specializing in building robust web applications with Python, JavaScript, and modern frontend frameworks. Passionate about AI integration and sleek, functional UI/UX design.",
+  "location": "Kerala, India",
+  "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80",
+  "socials": {
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+  },
+  "skills": [
+    "Python", "JavaScript (ES6+)", "React", "Node.js", 
+    "REST APIs", "SQL", "Git & GitHub", "UI/UX Design"
+  ],
+  "projects": [
+    {
+      "title": "EliteBoard",
+      "description": "A secure, Kanban-style task management platform featuring role-based access control and simulated two-factor authentication.",
+      "tags": ["React", "Node.js", "CSS Grid"],
+      "link": "#"
+    },
+    {
+      "title": "AI Construction Auditor",
+      "description": "An intelligent fraud detection layer that cross-references real-time material consumption against a dynamic rate ledger.",
+      "tags": ["Python", "API Integration", "Logic Layer"],
+      "link": "#"
+    },
+    {
+      "title": "The Communication Lab",
+      "description": "An e-learning module designed to gamify soft-skills development using the structured CLEAR communication framework.",
+      "tags": ["JavaScript", "UI/UX", "Frontend"],
+      "link": "#"
+    }
+  ]
+}
