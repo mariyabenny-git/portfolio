@@ -7,10 +7,17 @@
   "socials": {
     "github": "https://github.com",
     "linkedin": "https://linkedin.com",
+    "email": "mailto:your.email@example.com"
   },
   "skills": [
-    "Python", "JavaScript (ES6+)", "React", "Node.js", 
-    "REST APIs", "SQL", "Git & GitHub", "UI/UX Design"
+    "Python",
+    "JavaScript (ES6+)",
+    "React",
+    "Node.js",
+    "REST APIs",
+    "SQL",
+    "Git & GitHub",
+    "UI/UX Design"
   ],
   "projects": [
     {
