@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initPortfolio() {
     try {
-        const response = await fetch('profile.json');
+        const response = await fetch('./profile.json');
         if (!response.ok) throw new Error('Failed to load profile mapping configuration.');
         const data = await response.json();
 
